@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maze.ConsoleApp", "Maze.ConsoleApp\Maze.ConsoleApp.csproj", "{9AF85610-789A-4AE6-9870-98485FEE6C43}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maze.Logic", "Maze.Logic\Maze.Logic.csproj", "{17F3C223-AF65-48EC-A5F1-636BE98F6CE7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maze.AngularApp.Server", "Maze.AngularApp\Maze.AngularApp.Server\Maze.AngularApp.Server.csproj", "{0BD70421-4160-4175-8115-8F88F3D7AA33}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "maze.angularapp.client", "Maze.AngularApp\maze.angularapp.client\maze.angularapp.client.esproj", "{04C69697-BE5A-406C-8501-06EE640763B6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9AF85610-789A-4AE6-9870-98485FEE6C43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AF85610-789A-4AE6-9870-98485FEE6C43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AF85610-789A-4AE6-9870-98485FEE6C43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AF85610-789A-4AE6-9870-98485FEE6C43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17F3C223-AF65-48EC-A5F1-636BE98F6CE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17F3C223-AF65-48EC-A5F1-636BE98F6CE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17F3C223-AF65-48EC-A5F1-636BE98F6CE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17F3C223-AF65-48EC-A5F1-636BE98F6CE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BD70421-4160-4175-8115-8F88F3D7AA33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BD70421-4160-4175-8115-8F88F3D7AA33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BD70421-4160-4175-8115-8F88F3D7AA33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BD70421-4160-4175-8115-8F88F3D7AA33}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04C69697-BE5A-406C-8501-06EE640763B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04C69697-BE5A-406C-8501-06EE640763B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04C69697-BE5A-406C-8501-06EE640763B6}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{04C69697-BE5A-406C-8501-06EE640763B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04C69697-BE5A-406C-8501-06EE640763B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04C69697-BE5A-406C-8501-06EE640763B6}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

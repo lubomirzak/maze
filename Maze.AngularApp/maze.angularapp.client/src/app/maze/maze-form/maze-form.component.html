@@ -1,0 +1,70 @@
+<div id="formContainer" class="container">
+  <form (ngSubmit)="onSubmit()" #mazeForm="ngForm">
+    <div class="form-group">
+      <label for="dimensionX">Dimension X</label>
+      <input
+        type="number"
+        class="form-control"
+        id="dimensionX"
+        required
+        min="5"
+        max="50"
+        [(ngModel)]="model.dimensionX"
+        name="dimensionX"
+        #dimensionX="ngModel"
+      />
+      <div
+        [hidden]="dimensionX.valid || dimensionX.pristine"
+        class="alert alert-danger"
+      >
+        Dimension X value must be between 5 to 50 (included)
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="dimensionY">Dimension Y</label>
+      <input
+        type="number"
+        class="form-control"
+        id="dimensionY"
+        required
+        min="5"
+        max="50"
+        [(ngModel)]="model.dimensionY"
+        name="dimensionY"
+        #dimensionY="ngModel"
+      />
+      <div
+        [hidden]="dimensionY.valid || dimensionY.pristine"
+        class="alert alert-danger"
+      >
+        Dimension Y value must be between 5 to 50 (included)
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <button
+          type="submit"
+          class="btn btn-primary left"
+          [disabled]="!mazeForm.form.valid"
+        >
+          Submit
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <div [hidden]="!submitted">
+    <hr />
+    <button
+      class="btn btn-success left"
+      (click)="changeTraverseMode(2)"
+      style="margin-right: 15px"
+    >
+      Show path
+    </button>
+    <button class="btn btn-success left" (click)="changeTraverseMode(1)">
+      Traverse Manually
+    </button>
+  </div>
+</div>

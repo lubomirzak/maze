@@ -1,0 +1,22 @@
+<div style="background-color: black">
+  <h1 id="tableLabel" class="header">Maze App</h1>
+</div>
+
+<h2>Welcome to the maze app!</h2>
+
+<div class="containter app-container">
+  <div class="row app-container-row">
+    <div class="col-md-3 offset-md-1">
+      <app-maze-form
+        (mazeLoadedEvent)="mazeLoaded($event)"
+        (traverseModeChangedEvent)="traverseModeChanged($event)"
+      ></app-maze-form>
+    </div>
+    <div class="col-md-7">
+      <app-maze-canvas
+        [traverseMode]="traverseMode"
+        [maze]="maze"
+      ></app-maze-canvas>
+    </div>
+  </div>
+</div>

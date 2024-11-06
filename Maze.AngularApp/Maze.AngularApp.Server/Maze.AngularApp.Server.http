@@ -1,0 +1,6 @@
+@Maze.AngularApp.Server_HostAddress = http://localhost:5217
+
+GET {{Maze.AngularApp.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

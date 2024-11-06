@@ -1,0 +1,32 @@
+﻿:host {
+  max-width: 1280px;
+  padding: 2rem;
+  text-align: center;
+}
+
+th,
+td {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+table {
+  margin: 0 auto;
+}
+
+.header {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 15px;
+  text-align: left;
+  color: white;
+}
+
+.app-container {
+  margin-top: 25px;
+}
+
+.app-container-row {
+  margin-left: 15px;
+  margin-right: 15px;
+}
