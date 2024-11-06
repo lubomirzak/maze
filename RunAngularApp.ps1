@@ -1,5 +1,5 @@
 # Build project
-dotnet rebuild
+dotnet build
 
 # Run server
 Start-Process dotnet run -WorkingDirectory .\Maze.AngularApp\Maze.AngularApp.Server\ 
