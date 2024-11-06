@@ -1,6 +1,5 @@
 # Build project
-dotnet build
+dotnet rebuild
 
-# Run server in new window
+# Run server
 Start-Process dotnet run -WorkingDirectory .\Maze.AngularApp\Maze.AngularApp.Server\ 
-# -Argumentlist "--project .\Maze.AngularApp.Server.csproj  --launch-profile https"
