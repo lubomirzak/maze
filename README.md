@@ -1,8 +1,8 @@
 # Maze app
 
-This simple project was created to solve of generating and traversing generated maze in C#/Angular.
+This simple project was created to solve of generating and traversing generated maze in .NET/Angular.
 
-Initially I had Console app done with Spectre console inputs. Afterwards I decided that this is a nice opportunity to learn a bit of Angular, so I added Angular frontend project solving the same issue while extracting common models and services to its own Maze.Logic project.
+Initially I created a simple Console app done via Spectre Console. Afterwards I decided that this is a nice opportunity to learn a bit of Angular, so I added Angular frontend project solving the same issue while extracting common models and services to its own Maze.Logic project.
 
 ## Console App
 
