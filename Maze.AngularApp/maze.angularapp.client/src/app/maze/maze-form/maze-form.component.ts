@@ -6,8 +6,8 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { MazeFormModel } from './maze-form-model';
-import { MazeModel } from '../maze-model';
+import { MazeForm } from './maze-form';
+import { Maze } from '../shared/maze';
 import { TraverseMode } from '../../shared/app.traverse-mode.enum';
 
 @Component({
@@ -19,42 +19,45 @@ export class MazeFormComponent {
   constructor(private http: HttpClient) {}
 
   @Input() reset: boolean = false;
-  @Output() mazeLoadedEvent = new EventEmitter<MazeModel>();
+  @Output() mazeLoadedEvent = new EventEmitter<Maze>();
   @Output() traverseModeChangedEvent = new EventEmitter<TraverseMode>();
   @Output() isPathVisibleChangedEvent = new EventEmitter<boolean>();
 
-  model = new MazeFormModel(10, 10);
+  model = new MazeForm(10, 10);
   submitted = false;
   traverseModeSelected = false;
   pathVisible = false;
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['reset']) {
-      this.model = new MazeFormModel(10, 10);
+      this.model = new MazeForm(10, 10);
       this.reset = false;
     }
   }
 
+  // Modes are Manual or Automatic
   changeTraverseMode(mode: TraverseMode) {
     this.traverseModeSelected = true;
     this.traverseModeChangedEvent.emit(mode);
   }
 
+  // Shows/hides path on the canvas
   setPathVisible(visible: boolean) {
     this.pathVisible = visible;
     this.isPathVisibleChangedEvent.emit(visible);
   }
 
+  // Resets the form to the initial state. By firing empty maze event canvas should get hidden.
   onReset() {
     this.submitted = false;
     this.traverseModeChangedEvent.emit(TraverseMode.None);
-    this.mazeLoadedEvent.emit({} as MazeModel);    
+    this.mazeLoadedEvent.emit({} as Maze);
   }
 
+  // Fetch the data and pass it to parent which can pass it to the canvas-child
   onSubmit() {
-    // fetch the data and pass it to parent
     this.http
-      .get<MazeModel>(
+      .get<Maze>(
         `/maze/getmaze/${this.model.dimensionX}/${this.model.dimensionY}`
       )
       .subscribe({

@@ -1,19 +1,18 @@
 import { Component } from '@angular/core';
-import { MazeModel } from './maze/maze-model';
+import { Maze } from './maze/shared/maze';
 import { TraverseMode } from './shared/app.traverse-mode.enum';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
 })
 export class AppComponent {
-
-  maze: MazeModel = {} as MazeModel;
+  maze: Maze = {} as Maze;
   traverseMode: TraverseMode = TraverseMode.None;
   isPathVisible: boolean = false;
 
-  mazeLoaded(loadedMaze: MazeModel) {
+  mazeLoaded(loadedMaze: Maze) {
     this.maze = loadedMaze;
   }
 
@@ -21,7 +20,7 @@ export class AppComponent {
     this.traverseMode = mode;
   }
 
-  isPathVisibleChanged(visible: boolean){
+  isPathVisibleChanged(visible: boolean) {
     this.isPathVisible = visible;
   }
 }

@@ -55,7 +55,10 @@
   </form>
 
   <div [hidden]="!submitted || traverseModeSelected">
-    <button class="btn btn-success left margin-right-15" (click)="changeTraverseMode(2)">
+    <button
+      class="btn btn-success left margin-right-15"
+      (click)="changeTraverseMode(2)"
+    >
       Traverse Automatically
     </button>
     <button class="btn btn-success left" (click)="changeTraverseMode(1)">

@@ -3,15 +3,17 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MazeCanvasComponent } from './maze-canvas.component';
 import { Component, ViewChild } from '@angular/core';
 import { TraverseMode } from '../../shared/app.traverse-mode.enum';
-import { MazeModel } from '../maze-model';
-import { MazeCellModel } from '../maze-cell-model';
+import { Maze } from '../shared/maze';
+import { MazeCell } from '../shared/maze-cell';
 
-const mockMazeModel = new MazeModel(
+const mockMazeCell = new MazeCell(0, 0, false, false, false, false, true);
+
+const mockMazeModel = new Maze(
   10,
   10,
-  [new MazeCellModel(0, 0, false, false, false, false, true)],
-  [new MazeCellModel(0, 0, false, false, false, false, true)],
-  new MazeCellModel(0, 0, false, false, false, false, true)
+  [mockMazeCell],
+  [mockMazeCell],
+  mockMazeCell
 );
 
 describe('MazeCanvasComponent', () => {
@@ -51,7 +53,9 @@ describe('MazeCanvasComponent', () => {
     fixture.detectChanges();
 
     expect(component.mazeCanvasComponent.redraw).toHaveBeenCalledTimes(1);
-    expect(component.mazeCanvasComponent.drawCorrectPath).toHaveBeenCalledTimes(0);
+    expect(component.mazeCanvasComponent.drawCorrectPath).toHaveBeenCalledTimes(
+      0
+    );
   });
 
   it('should trigger automatic mode if traverse mode is changed to automatic', () => {
@@ -63,7 +67,9 @@ describe('MazeCanvasComponent', () => {
     component.traverseMode = TraverseMode.Automatic;
     fixture.detectChanges();
 
-    expect(component.mazeCanvasComponent.traverseAutomatically).toHaveBeenCalledTimes(1);
+    expect(
+      component.mazeCanvasComponent.traverseAutomatically
+    ).toHaveBeenCalledTimes(1);
   });
 
   it('should draw path if Show path button was clicked', () => {
@@ -89,6 +95,6 @@ class TestMazeCanvasComponent {
   @ViewChild(MazeCanvasComponent)
   mazeCanvasComponent: MazeCanvasComponent = {} as MazeCanvasComponent;
   traverseMode: TraverseMode = TraverseMode.None;
-  maze: MazeModel = {} as MazeModel;
+  maze: Maze = {} as Maze;
   isPathVisible: boolean = false;
 }

@@ -20,6 +20,8 @@ namespace Maze.AngularApp.Server.Controllers
         [HttpGet("getMaze/{dimensionX}/{dimensionY}")]
         public IActionResult GetMaze(int dimensionX, int dimensionY)
         {
+            const string errorMessage = "Non cartesian cell found in cell array.";
+            
             var grid = new Grid(dimensionX, dimensionY);
             var maze = RecursiveBacktracker.GenerateMaze(grid);
             maze.Path = MazeSolverService.Solve(maze);
@@ -30,18 +32,19 @@ namespace Maze.AngularApp.Server.Controllers
             {
                 if (cell is not CartesianCell cartesianCell)
                 {
-                    throw new InvalidOperationException("Non cartesian cell found in cell array.");
+                    _logger.LogError(errorMessage);
+                    throw new InvalidOperationException(errorMessage);
                 }
 
                 result.Cells.Add(new MazeCell(cartesianCell, maze.Rows, maze.Columns));
             }
 
-            // we do not need to calculate borders here
             foreach (var cell in maze.Path)
             {
                 if (cell is not CartesianCell cartesianCell)
                 {
-                    throw new InvalidOperationException("Non cartesian cell found in cell array.");
+                    _logger.LogError(errorMessage);
+                    throw new InvalidOperationException(errorMessage);
                 }
 
                 result.Path.Add(new MazeCell(cell.Column, cell.Row));

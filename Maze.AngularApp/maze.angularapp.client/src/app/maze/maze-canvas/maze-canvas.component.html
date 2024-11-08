@@ -3,12 +3,18 @@
     <canvas id="canvas" #canvas class="canvas"> </canvas>
   </div>
 
-  <div class="row" [hidden]="!solved ">
-    <h3 [hidden]="traverseMode == 2" class="canvas-solved-header">Congratulations! You have solved the maze.</h3>
-    <h3 [hidden]="traverseMode == 1" class="canvas-solved-header">Congratulations! Mario did reach end of the maze.</h3>
+  <div class="row" [hidden]="!solved">
+    <h3 [hidden]="traverseMode == 2" class="canvas-solved-header">
+      Congratulations! You have solved the maze.
+    </h3>
+    <h3 [hidden]="traverseMode == 1" class="canvas-solved-header">
+      Congratulations! Mario did reach end of the maze.
+    </h3>
   </div>
 
   <div class="row">
-    <h3 [hidden]="!isPathVisible || solved" class="canvas-solved-header">This is Mario's path.</h3>
+    <h3 [hidden]="!isPathVisible || solved" class="canvas-solved-header">
+      This is Mario's path.
+    </h3>
   </div>
 </div>

@@ -1,6 +1,6 @@
 namespace Maze.Logic.Models;
 
-public class CartesianCell : Cell
+public class CartesianCell(int row, int col) : Cell(row, col)
 {
     // Neighboring cells
     public CartesianCell? North { get; set; }
@@ -12,7 +12,4 @@ public class CartesianCell : Cell
         new Cell?[] { North, South, East, West }
             .Where(c => c != null)
             .ToList();
-
-    public CartesianCell(int row, int col)
-        : base(row, col) { }
 }

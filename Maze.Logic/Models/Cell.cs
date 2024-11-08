@@ -1,29 +1,21 @@
 namespace Maze.Logic.Models;
 
-public abstract class Cell
+public abstract class Cell(int row, int col)
 {
     // Position in the maze
-    public int Row { get; }
-    public int Column { get; }
+    public int Row { get; } = row;
+    public int Column { get; } = col;
 
     // Holds a info if this cell is part of the automatic traverse path
     public bool InPath { get; set; } = false;
 
     // Cells that are linked to this cell
-    private readonly Dictionary<Cell, bool> _links;
+    private readonly Dictionary<Cell, bool> _links = new Dictionary<Cell, bool>();
     public List<Cell> Links => _links.Keys.ToList();
 
     public abstract List<Cell?> Neighbors { get; }
 
-    public int Weight { get; set; }
-
-    public Cell(int row, int col)
-    {
-        Row = row;
-        Column = col;
-        Weight = 1;
-        _links = new Dictionary<Cell, bool>();
-    }
+    public int Weight { get; set; } = 1;
 
     public virtual void Link(Cell cell, bool bidirectional = true)
     {

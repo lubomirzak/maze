@@ -7,8 +7,8 @@ import {
   SimpleChanges,
   HostListener,
 } from '@angular/core';
-import { MazeModel } from '../maze-model';
-import { MazeCellModel } from '../maze-cell-model';
+import { Maze } from '../shared/maze';
+import { MazeCell } from '../shared/maze-cell';
 import { TraverseMode } from '../../shared/app.traverse-mode.enum';
 
 @Component({
@@ -17,7 +17,7 @@ import { TraverseMode } from '../../shared/app.traverse-mode.enum';
   styleUrl: './maze-canvas.component.css',
 })
 export class MazeCanvasComponent implements OnChanges {
-  @Input() maze: MazeModel = {} as MazeModel;
+  @Input() maze: Maze = {} as Maze;
   @Input() traverseMode: TraverseMode = TraverseMode.None;
   @Input() isPathVisible: boolean = false;
 
@@ -73,6 +73,8 @@ export class MazeCanvasComponent implements OnChanges {
     }
   }
 
+  // In Manual mode we listen to arrow keys to navigate Mario around the canvas.
+  // Redraw is called after each click.
   @HostListener('window:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
     if (
@@ -117,6 +119,7 @@ export class MazeCanvasComponent implements OnChanges {
     }
   }
 
+  // Shortcut to redraw everything needed - canvas, mario and path (optionally)
   redraw(): void {
     this.drawCanvas();
     this.drawMario();
@@ -126,6 +129,8 @@ export class MazeCanvasComponent implements OnChanges {
     }
   }
 
+  // Resizes the canvas based on maze grid size.
+  // Afterwards paints borders of each cell one by one until whole maze is displayed.
   drawCanvas(): void {
     var numberOfCells = this.maze.rows * this.maze.columns;
 
@@ -203,9 +208,8 @@ export class MazeCanvasComponent implements OnChanges {
     this.isCanvasVisible = true;
   }
 
+  // Draws Mario on an active cell of the maze.
   drawMario(): void {
-    var ctx = this.context;
-
     var baseX = this.maze.activeCell.x * this.size;
     var baseY = this.maze.activeCell.y * this.size;
 
@@ -217,15 +221,16 @@ export class MazeCanvasComponent implements OnChanges {
 
     var img = new Image();
     img.src = 'mario.jpeg';
-    img.onload = function (this) {
-      ctx.drawImage(img, upperXOffset, upperYOffset, width, height);
+    img.onload = () => {
+      this.context.drawImage(img, upperXOffset, upperYOffset, width, height);
     };
   }
 
+  // Draws correct path into the canvas for given maze - uses red line to do so.
   drawCorrectPath(): void {
     var middle = this.size / 2;
 
-    var previousCell = {} as MazeCellModel;
+    var previousCell = {} as MazeCell;
     var previousX = 0 + middle;
     var previousY = 0;
 
@@ -280,6 +285,9 @@ export class MazeCanvasComponent implements OnChanges {
     ctx.stroke();
   }
 
+  // Moves Mario along path step by step every 'interval' miliseconds
+  // Since JavaScript is by default sync, I had to use promise chain.
+  // This can be stopped if needed via isCanvasVisible being set to false.
   traverseAutomatically(): void {
     var interval = 400;
     var promise = Promise.resolve();
@@ -305,7 +313,8 @@ export class MazeCanvasComponent implements OnChanges {
     });
   }
 
-  getCell(x: number, y: number): MazeCellModel {
+  // Returns cell located at given position in maze
+  getCell(x: number, y: number): MazeCell {
     var result = this.maze.cells.find((cell) => {
       return cell.x == x && cell.y == y;
     });

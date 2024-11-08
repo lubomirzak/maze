@@ -5,9 +5,9 @@ import {
 } from '@angular/common/http/testing';
 import { MazeFormComponent } from './maze-form.component';
 import { FormsModule } from '@angular/forms';
-import { MazeModel } from '../maze-model';
-import { MazeCellModel } from '../maze-cell-model';
-import { MazeFormModel } from './maze-form-model';
+import { Maze } from '../shared/maze';
+import { MazeCell } from '../shared/maze-cell';
+import { MazeForm } from './maze-form';
 import { TraverseMode } from '../../shared/app.traverse-mode.enum';
 
 describe('MazeFormComponent', () => {
@@ -36,17 +36,17 @@ describe('MazeFormComponent', () => {
   });
 
   it('should retrieve maze model from the server on submit and emit data', () => {
-    const mockMazeModel = new MazeModel(
+    const mockMazeModel = new Maze(
       10,
       10,
       [],
       [],
-      new MazeCellModel(0, 0, false, false, false, false, true)
+      new MazeCell(0, 0, false, false, false, false, true)
     );
 
     spyOn(component.mazeLoadedEvent, 'emit');
 
-    component.model = new MazeFormModel(10, 10);
+    component.model = new MazeForm(10, 10);
     component.onSubmit();
 
     const req = httpMock.expectOne(`/maze/getmaze/10/10`);
@@ -55,7 +55,9 @@ describe('MazeFormComponent', () => {
 
     fixture.detectChanges();
 
-    expect(component.mazeLoadedEvent.emit).toHaveBeenCalledOnceWith(mockMazeModel);
+    expect(component.mazeLoadedEvent.emit).toHaveBeenCalledOnceWith(
+      mockMazeModel
+    );
   });
 
   it('should emit traverse mode on button click', () => {
@@ -65,7 +67,9 @@ describe('MazeFormComponent', () => {
 
     fixture.detectChanges();
 
-    expect(component.traverseModeChangedEvent.emit).toHaveBeenCalledOnceWith(TraverseMode.Automatic);
+    expect(component.traverseModeChangedEvent.emit).toHaveBeenCalledOnceWith(
+      TraverseMode.Automatic
+    );
   });
 
   it('should emit path visibility on button click', () => {
@@ -75,6 +79,8 @@ describe('MazeFormComponent', () => {
 
     fixture.detectChanges();
 
-    expect(component.isPathVisibleChangedEvent.emit).toHaveBeenCalledOnceWith(true);
+    expect(component.isPathVisibleChangedEvent.emit).toHaveBeenCalledOnceWith(
+      true
+    );
   });
 });
