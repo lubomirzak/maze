@@ -25,7 +25,7 @@ export class MazeCanvasComponent implements OnChanges {
   isCanvasVisible = false;
   solved = false;
 
-  size = 50;
+  size = 50; // default size of the cell
 
   @ViewChild('canvas')
   canvas: ElementRef = {} as ElementRef;
@@ -89,7 +89,7 @@ export class MazeCanvasComponent implements OnChanges {
       if (
         event.key == 'ArrowDown' &&
         !activeCell.borderBottom &&
-        activeCell.y != this.maze.columns - 1
+        activeCell.y != this.maze.rows - 1
       ) {
         this.maze.activeCell = this.getCell(activeCell.x, activeCell.y + 1);
       }
@@ -281,7 +281,7 @@ export class MazeCanvasComponent implements OnChanges {
   }
 
   traverseAutomatically(): void {
-    var interval = 500;
+    var interval = 400;
     var promise = Promise.resolve();
 
     this.maze.path.forEach((cell) => {
