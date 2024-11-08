@@ -1,15 +1,12 @@
 using Maze.Logic.Algorithms;
 using Maze.Logic.Services;
 using Spectre.Console;
-
 using Grid = Maze.Logic.Models.Grid;
 
 namespace Maze.ConsoleApp.Services;
 
-public class ExecutorService
+public static class ExecutorService
 {
-    public ExecutorService() { }
-
     public static void Execute()
     {
         AnsiConsole.Write(new Rule());

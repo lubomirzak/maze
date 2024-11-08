@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maze.ConsoleApp", "Maze.Con
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maze.Logic", "Maze.Logic\Maze.Logic.csproj", "{17F3C223-AF65-48EC-A5F1-636BE98F6CE7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maze.AngularApp.Server", "Maze.AngularApp\Maze.AngularApp.Server\Maze.AngularApp.Server.csproj", "{0BD70421-4160-4175-8115-8F88F3D7AA33}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maze.AngularApp.Server", "Maze.AngularApp\Maze.AngularApp.Server\Maze.AngularApp.Server.csproj", "{0BD70421-4160-4175-8115-8F88F3D7AA33}"
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "maze.angularapp.client", "Maze.AngularApp\maze.angularapp.client\maze.angularapp.client.esproj", "{04C69697-BE5A-406C-8501-06EE640763B6}"
 EndProject
@@ -38,5 +38,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {34775A50-E1ED-4A92-853F-08FA721EB022}
 	EndGlobalSection
 EndGlobal

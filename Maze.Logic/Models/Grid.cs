@@ -1,5 +1,5 @@
-using Maze.Logic.Enums;
 using System.Text;
+using Maze.Logic.Enums;
 
 namespace Maze.Logic.Models;
 
@@ -15,6 +15,7 @@ public class Grid
     // Cell marking active cell during manual transition
     public Cell ActiveCell { get; set; }
 
+    // List of cells that present an actual solution to the maze
     public List<Cell> Path { get; set; }
 
     public virtual Cell? this[int row, int column]
@@ -105,6 +106,8 @@ public class Grid
         return Move(DirectionEnum.North);
     }
 
+    /// <summary>
+    /// Generates a string representation of given maze in human readable format.
     public override string ToString()
     {
         var output = new StringBuilder("+   +");

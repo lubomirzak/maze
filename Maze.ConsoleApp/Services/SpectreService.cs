@@ -32,8 +32,8 @@ public class SpectreService
                     > DimensionConstants.MaximumDimensionSize => ValidationResult.Error(
                         $"Maximum value allowed is {DimensionConstants.MaximumDimensionSize}"
                     ),
-                    >= DimensionConstants.MinimalDimensionSize and <= DimensionConstants.MaximumDimensionSize =>
-                        ValidationResult.Success(),
+                    >= DimensionConstants.MinimalDimensionSize
+                    and <= DimensionConstants.MaximumDimensionSize => ValidationResult.Success(),
                 }
             );
 

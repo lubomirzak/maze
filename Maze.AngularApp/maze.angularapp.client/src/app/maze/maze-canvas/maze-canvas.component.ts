@@ -51,9 +51,11 @@ export class MazeCanvasComponent implements OnChanges {
         this.maze.activeCell = this.getCell(0,0);
         this.drawCanvas();
         this.drawMario();
+        this.solved = false;
       } else if (mode == TraverseMode.Automatic) {
         this.drawCanvas();
         this.drawCorrectPath();
+        this.solved = false;
       }
     }
   }
