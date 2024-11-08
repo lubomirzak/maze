@@ -18,7 +18,7 @@ Angular app consists of two projects - maze.angularapp.client and Maze.AngularAp
 
 Client displays very simple UI with two inputs to enter dimensions of the maze. Once submitted to the server, maze is returned and can be solved either manually via clicking on Traverse manually button and navigating Mario via standard Left/Right/Up/Down arrow keys on the keyboard or automatically via clicking on the Show path button.
 
-To run it either run it from Visual Studio as multiple projects startup/run the server part or run `RunAngularApp.ps1` powershell script.
+To run it either run it from Visual Studio as multiple projects startup/run the server part or run `RunAngularApp.ps1` powershell script. Default port for the client is `https://localhost:4200/`.
 
 (Below there are parts of the original Readme generated from the CLI)
 
