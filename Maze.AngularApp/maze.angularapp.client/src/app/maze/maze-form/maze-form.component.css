@@ -5,3 +5,11 @@
 #formContainer.container button {
   float: left;
 }
+
+.margin-right-15 {
+  margin-right: 15px;
+}
+
+.helper-buttons {
+  padding-top: 40px;
+}

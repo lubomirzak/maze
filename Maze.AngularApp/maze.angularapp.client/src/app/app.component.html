@@ -10,12 +10,14 @@
       <app-maze-form
         (mazeLoadedEvent)="mazeLoaded($event)"
         (traverseModeChangedEvent)="traverseModeChanged($event)"
+        (isPathVisibleChangedEvent)="isPathVisibleChanged($event)"
       ></app-maze-form>
     </div>
     <div class="col-md-7">
       <app-maze-canvas
         [traverseMode]="traverseMode"
         [maze]="maze"
+        [isPathVisible]="isPathVisible"
       ></app-maze-canvas>
     </div>
   </div>

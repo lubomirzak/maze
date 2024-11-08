@@ -41,7 +41,6 @@ describe('MazeFormComponent', () => {
       10,
       [],
       [],
-      false,
       new MazeCellModel(0, 0, false, false, false, false, true)
     );
 
@@ -67,5 +66,15 @@ describe('MazeFormComponent', () => {
     fixture.detectChanges();
 
     expect(component.traverseModeChangedEvent.emit).toHaveBeenCalledOnceWith(TraverseMode.Automatic);
+  });
+
+  it('should emit path visibility on button click', () => {
+    spyOn(component.isPathVisibleChangedEvent, 'emit');
+
+    component.setPathVisible(true);
+
+    fixture.detectChanges();
+
+    expect(component.isPathVisibleChangedEvent.emit).toHaveBeenCalledOnceWith(true);
   });
 });

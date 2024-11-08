@@ -2,13 +2,13 @@
 
 This simple project was created to solve of generating and traversing generated maze in .NET/Angular.
 
-Initially I created a simple Console app done via Spectre Console. Afterwards I decided that this is a nice opportunity to learn a bit of Angular, so I added Angular frontend project solving the same issue while extracting common models and services to its own Maze.Logic project.
+Initially I created a simple Console app done via Spectre Console. Afterwards I decided that this is a nice opportunity to pick up Angular, so I added Angular frontend project solving the same issue while extracting common models and services to its own Maze.Logic project.
 
 ## Console App
 
 Maze.ConsoleApp is simple console app that uses parts of Maze.Logic to generate maze via SpectreConsole prompts.
 
-Additionally it allows user to either traverse the maze or show solution to the maze automatically.
+Additionally it allows user to either traverse the maze or show correct traverse path to the maze automatically.
 
 To run it either build the project and run the exe by hand or run `RunConsoleApp.ps1` powershell script that does that for you.
 
@@ -16,7 +16,7 @@ To run it either build the project and run the exe by hand or run `RunConsoleApp
 
 Angular app consists of two projects - maze.angularapp.client and Maze.AngularApp.Server.
 
-Client displays very simple UI with two inputs to enter dimensions of the maze. Once submitted to the server, maze is returned and can be solved either manually via clicking on Traverse manually button and navigating Mario via standard Left/Right/Up/Down arrow keys on the keyboard or automatically via clicking on the Show path button.
+Client displays very simple UI with two inputs to enter dimensions of the maze. Once submitted to the server, maze is displayed and can be solved either manually via clicking on "Traverse manually" button and navigating Mario via standard Left/Right/Up/Down arrow keys on the keyboard or automatically via clicking on the "Show path" button. The "Reset" will hide the maze and return user to the initial state.
 
 To run it either run it from Visual Studio as multiple projects startup/run the server part or run `RunAngularApp.ps1` powershell script. Default port for the client is `https://localhost:4200/`.
 

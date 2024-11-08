@@ -21,9 +21,12 @@ export class MazeFormComponent {
   @Input() reset: boolean = false;
   @Output() mazeLoadedEvent = new EventEmitter<MazeModel>();
   @Output() traverseModeChangedEvent = new EventEmitter<TraverseMode>();
+  @Output() isPathVisibleChangedEvent = new EventEmitter<boolean>();
 
   model = new MazeFormModel(10, 10);
   submitted = false;
+  traverseModeSelected = false;
+  pathVisible = false;
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['reset']) {
@@ -33,7 +36,19 @@ export class MazeFormComponent {
   }
 
   changeTraverseMode(mode: TraverseMode) {
+    this.traverseModeSelected = true;
     this.traverseModeChangedEvent.emit(mode);
+  }
+
+  setPathVisible(visible: boolean) {
+    this.pathVisible = visible;
+    this.isPathVisibleChangedEvent.emit(visible);
+  }
+
+  onReset() {
+    this.submitted = false;
+    this.traverseModeChangedEvent.emit(TraverseMode.None);
+    this.mazeLoadedEvent.emit({} as MazeModel);    
   }
 
   onSubmit() {
@@ -44,7 +59,9 @@ export class MazeFormComponent {
       )
       .subscribe({
         next: (result) => {
+          this.traverseModeSelected = false;
           this.submitted = true;
+          this.setPathVisible(false);
           this.traverseModeChangedEvent.emit(TraverseMode.None);
           this.mazeLoadedEvent.emit(result);
         },

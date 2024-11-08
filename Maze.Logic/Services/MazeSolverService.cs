@@ -15,7 +15,7 @@ public class MazeSolverService
 
         startNode.InPath = true;
 
-        var endNode = grid[grid.Columns - 1, grid.Rows - 1]!;
+        var endNode = grid[grid.Rows - 1, grid.Columns - 1]!;
 
         // Solve recursively.
         Solve(endNode, path);

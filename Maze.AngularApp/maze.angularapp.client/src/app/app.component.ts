@@ -11,13 +11,17 @@ export class AppComponent {
 
   maze: MazeModel = {} as MazeModel;
   traverseMode: TraverseMode = TraverseMode.None;
+  isPathVisible: boolean = false;
 
   mazeLoaded(loadedMaze: MazeModel) {
     this.maze = loadedMaze;
   }
 
-  traverseModeChanged(reset: TraverseMode) {
-    this.traverseMode = reset;
-    return false;
+  traverseModeChanged(mode: TraverseMode) {
+    this.traverseMode = mode;
+  }
+
+  isPathVisibleChanged(visible: boolean){
+    this.isPathVisible = visible;
   }
 }

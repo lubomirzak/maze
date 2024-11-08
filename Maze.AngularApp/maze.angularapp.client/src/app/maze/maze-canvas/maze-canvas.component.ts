@@ -19,8 +19,10 @@ import { TraverseMode } from '../../shared/app.traverse-mode.enum';
 export class MazeCanvasComponent implements OnChanges {
   @Input() maze: MazeModel = {} as MazeModel;
   @Input() traverseMode: TraverseMode = TraverseMode.None;
+  @Input() isPathVisible: boolean = false;
 
-  canvasVisible = false;
+  renderPath = false;
+  isCanvasVisible = false;
   solved = false;
 
   size = 50;
@@ -34,11 +36,25 @@ export class MazeCanvasComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['maze']) {
-      if (Object.keys(this.maze).length > 0) {
-        this.maze.activeCell = this.maze.cells[0];
+    var mazeExists = Object.keys(this.maze).length > 0;
 
-        this.drawCanvas();
+    if (changes['maze']) {
+      if (mazeExists) {
+        this.maze.activeCell = this.maze.cells[0];
+        this.redraw();
+      } else {
+        this.isCanvasVisible = false;
+        this.solved = false;
+        this.renderPath = false;
+        this.isPathVisible = false;
+      }
+    }
+
+    if (changes['isPathVisible']) {
+      this.renderPath = changes['isPathVisible'].currentValue;
+
+      if (mazeExists) {
+        this.redraw();
       }
     }
 
@@ -48,14 +64,11 @@ export class MazeCanvasComponent implements OnChanges {
       this.traverseMode = mode;
 
       if (mode == TraverseMode.Manual) {
-        this.maze.activeCell = this.getCell(0,0);
-        this.drawCanvas();
-        this.drawMario();
+        this.maze.activeCell = this.getCell(0, 0);
         this.solved = false;
+        this.redraw();
       } else if (mode == TraverseMode.Automatic) {
-        this.drawCanvas();
-        this.drawCorrectPath();
-        this.solved = false;
+        this.traverseAutomatically();
       }
     }
   }
@@ -63,7 +76,7 @@ export class MazeCanvasComponent implements OnChanges {
   @HostListener('window:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
     if (
-      this.canvasVisible &&
+      this.isCanvasVisible &&
       this.traverseMode == TraverseMode.Manual &&
       !this.solved
     ) {
@@ -93,8 +106,7 @@ export class MazeCanvasComponent implements OnChanges {
         this.maze.activeCell = this.getCell(activeCell.x, activeCell.y - 1);
       }
 
-      this.drawCanvas();
-      this.drawMario();
+      this.redraw();
 
       if (
         this.maze.activeCell.y == this.maze.rows - 1 &&
@@ -102,6 +114,15 @@ export class MazeCanvasComponent implements OnChanges {
       ) {
         this.solved = true;
       }
+    }
+  }
+
+  redraw(): void {
+    this.drawCanvas();
+    this.drawMario();
+
+    if (this.isPathVisible) {
+      this.drawCorrectPath();
     }
   }
 
@@ -179,7 +200,7 @@ export class MazeCanvasComponent implements OnChanges {
 
     ctx.stroke();
 
-    this.canvasVisible = true;
+    this.isCanvasVisible = true;
   }
 
   drawMario(): void {
@@ -191,8 +212,8 @@ export class MazeCanvasComponent implements OnChanges {
     var size = this.size;
     var upperXOffset = baseX + size / 5;
     var upperYOffset = baseY + size / 10;
-    var width = size - (size / 10 * 3);
-    var height =  size - (size / 10 * 2);
+    var width = size - (size / 10) * 3;
+    var height = size - (size / 10) * 2;
 
     var img = new Image();
     img.src = 'mario.jpeg';
@@ -257,6 +278,31 @@ export class MazeCanvasComponent implements OnChanges {
     ctx.lineTo(previousX, previousY + middle);
 
     ctx.stroke();
+  }
+
+  traverseAutomatically(): void {
+    var interval = 500;
+    var promise = Promise.resolve();
+
+    this.maze.path.forEach((cell) => {
+      promise = promise.then(() => {
+        if (Object.keys(this.maze).length > 0) {
+          this.maze.activeCell = this.getCell(cell.x, cell.y);
+          this.redraw();
+        }
+
+        return new Promise((resolve) => {
+          // avoid moving Mario when reset was clicked
+          if (this.isCanvasVisible) {
+            setTimeout(resolve, interval);
+          }
+        });
+      });
+    });
+
+    promise.then(() => {
+      this.solved = true;
+    });
   }
 
   getCell(x: number, y: number): MazeCellModel {

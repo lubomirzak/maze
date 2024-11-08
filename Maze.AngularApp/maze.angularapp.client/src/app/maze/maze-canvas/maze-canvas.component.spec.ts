@@ -9,9 +9,8 @@ import { MazeCellModel } from '../maze-cell-model';
 const mockMazeModel = new MazeModel(
   10,
   10,
-  [],
-  [],
-  false,
+  [new MazeCellModel(0, 0, false, false, false, false, true)],
+  [new MazeCellModel(0, 0, false, false, false, false, true)],
   new MazeCellModel(0, 0, false, false, false, false, true)
 );
 
@@ -36,43 +35,46 @@ describe('MazeCanvasComponent', () => {
 
   it('should redraw canvas once maze is provided', () => {
     component.maze = mockMazeModel;
-
-    spyOn(component.mazeCanvasComponent, 'drawCanvas');
-
+    spyOn(component.mazeCanvasComponent, 'redraw');
     fixture.detectChanges();
-
-    expect(component.mazeCanvasComponent.drawCanvas).toHaveBeenCalledTimes(1);
+    expect(component.mazeCanvasComponent.redraw).toHaveBeenCalledTimes(1);
   });
 
-  it('should draw Mario if traverse mode is manual', () => {
+  it('should redraw canvas once traverse mode is changed to manual', () => {
     component.maze = mockMazeModel;
-    spyOn(component.mazeCanvasComponent, 'drawCanvas');
-    spyOn(component.mazeCanvasComponent, 'drawMario');
+    fixture.detectChanges();
+
+    spyOn(component.mazeCanvasComponent, 'redraw');
     spyOn(component.mazeCanvasComponent, 'drawCorrectPath');
 
     component.traverseMode = TraverseMode.Manual;
-
     fixture.detectChanges();
 
-    expect(component.mazeCanvasComponent.drawCanvas).toHaveBeenCalledTimes(2); // once from maze, once from mario
-    expect(component.mazeCanvasComponent.drawMario).toHaveBeenCalledTimes(1);
-    expect(component.mazeCanvasComponent.drawCorrectPath).toHaveBeenCalledTimes(
-      0
-    );
+    expect(component.mazeCanvasComponent.redraw).toHaveBeenCalledTimes(1);
+    expect(component.mazeCanvasComponent.drawCorrectPath).toHaveBeenCalledTimes(0);
   });
 
-  it('should draw path if traverse mode is automatic', () => {
+  it('should trigger automatic mode if traverse mode is changed to automatic', () => {
     component.maze = mockMazeModel;
-    spyOn(component.mazeCanvasComponent, 'drawCanvas');
-    spyOn(component.mazeCanvasComponent, 'drawMario');
-    spyOn(component.mazeCanvasComponent, 'drawCorrectPath');
+    fixture.detectChanges();
+
+    spyOn(component.mazeCanvasComponent, 'traverseAutomatically');
 
     component.traverseMode = TraverseMode.Automatic;
+    fixture.detectChanges();
+
+    expect(component.mazeCanvasComponent.traverseAutomatically).toHaveBeenCalledTimes(1);
+  });
+
+  it('should draw path if Show path button was clicked', () => {
+    component.maze = mockMazeModel;
+    fixture.detectChanges();
+
+    spyOn(component.mazeCanvasComponent, 'drawCorrectPath');
+    component.isPathVisible = true;
 
     fixture.detectChanges();
 
-    expect(component.mazeCanvasComponent.drawCanvas).toHaveBeenCalledTimes(2); // once from maze, once from mario
-    expect(component.mazeCanvasComponent.drawMario).toHaveBeenCalledTimes(0);
     expect(component.mazeCanvasComponent.drawCorrectPath).toHaveBeenCalledTimes(
       1
     );
@@ -81,11 +83,12 @@ describe('MazeCanvasComponent', () => {
 
 @Component({
   template:
-    '<app-maze-canvas [traverseMode]="traverseMode" [maze]="maze"></app-maze-canvas>',
+    '<app-maze-canvas [traverseMode]="traverseMode" [maze]="maze" [isPathVisible]="isPathVisible"></app-maze-canvas>',
 })
 class TestMazeCanvasComponent {
   @ViewChild(MazeCanvasComponent)
   mazeCanvasComponent: MazeCanvasComponent = {} as MazeCanvasComponent;
   traverseMode: TraverseMode = TraverseMode.None;
   maze: MazeModel = {} as MazeModel;
+  isPathVisible: boolean = false;
 }

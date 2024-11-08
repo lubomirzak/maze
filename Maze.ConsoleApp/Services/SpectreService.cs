@@ -17,7 +17,7 @@ public class SpectreService
             WriteDivider("Dimensions");
 
             AnsiConsole.MarkupLineInterpolated(
-                $"How big the maze should be? Please specify the dimensions.{Environment.NewLine}"
+                $"Please specify the dimensions of the maze.{Environment.NewLine}"
             );
             AnsiConsole.MarkupLineInterpolated(
                 $"[italic]Note: Dimensions should be between {DimensionConstants.MinimalDimensionSize}x{DimensionConstants.MinimalDimensionSize} and {DimensionConstants.MaximumDimensionSize}x{DimensionConstants.MaximumDimensionSize}[/] {Environment.NewLine}"
@@ -51,7 +51,7 @@ public class SpectreService
 
             dimensionsSettled = AnsiConsole.Prompt(
                 new ConfirmationPrompt(
-                    $"So dimensions of the maze should be [green]{dimensionX}x{dimensionY}[/]. Is that correct?"
+                    $"Are you sure you want to generate maze with dimensions [green]{dimensionX}x{dimensionY}[/]?"
                 )
             );
 

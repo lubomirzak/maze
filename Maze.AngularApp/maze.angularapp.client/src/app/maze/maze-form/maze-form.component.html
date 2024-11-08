@@ -1,5 +1,5 @@
 <div id="formContainer" class="container">
-  <form (ngSubmit)="onSubmit()" #mazeForm="ngForm">
+  <form (ngSubmit)="onSubmit()" #mazeForm="ngForm" [hidden]="submitted">
     <div class="form-group">
       <label for="dimensionX">Dimension X</label>
       <input
@@ -54,17 +54,31 @@
     </div>
   </form>
 
-  <div [hidden]="!submitted">
-    <hr />
-    <button
-      class="btn btn-success left"
-      (click)="changeTraverseMode(2)"
-      style="margin-right: 15px"
-    >
-      Show path
+  <div [hidden]="!submitted || traverseModeSelected">
+    <button class="btn btn-success left margin-right-15" (click)="changeTraverseMode(2)">
+      Traverse Automatically
     </button>
     <button class="btn btn-success left" (click)="changeTraverseMode(1)">
       Traverse Manually
     </button>
+  </div>
+
+  <div [hidden]="!submitted" class="helper-buttons">
+    <hr [hidden]="traverseModeSelected" />
+    <button
+      [hidden]="pathVisible"
+      class="btn btn-default left margin-right-15"
+      (click)="setPathVisible(true)"
+    >
+      Show path
+    </button>
+    <button
+      [hidden]="!pathVisible"
+      class="btn btn-default left margin-right-15"
+      (click)="setPathVisible(false)"
+    >
+      Hide path
+    </button>
+    <button class="btn btn-warning left" (click)="onReset()">Reset</button>
   </div>
 </div>
