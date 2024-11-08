@@ -1,5 +1,5 @@
 # Build project
-dotnet build
+dotnet build .\Maze.ConsoleApp\
 
 # Run the app
 Start-Process dotnet run -WorkingDirectory .\Maze.ConsoleApp\

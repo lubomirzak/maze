@@ -24,7 +24,6 @@ namespace Maze.AngularApp.Server.Controllers
             var maze = RecursiveBacktracker.GenerateMaze(grid);
             maze.Path = MazeSolverService.Solve(maze);
 
-
             var result = new Models.Maze(maze.Rows, maze.Columns);
 
             foreach (var cell in maze.Cells)
